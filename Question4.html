@@ -61,14 +61,18 @@
                         if (value.currencies.length > 1) {
                             var arr = [];
                             $.each(value.currencies, function (keyCurrencies, valueCurrencies) {
-                                if (valueCurrencies.code != "(none)" && valueCurrencies.code != null) {
+                                if (valueCurrencies.code != "(none)" && valueCurrencies.code != null && valueCurrencies.code != "") {
                                     arr[keyCurrencies] = valueCurrencies.code;
                                 }
                             });
                             html += "<td>"+arr.join(", ")+"</td>";
                         } 
                         else {
-                            html += "<td>"+value.currencies[0].code+"</td>";
+                            if (value.currencies[0].code != "(none)" && value.currencies[0].code != null && value.currencies[0].code != "") {
+                                html += "<td>"+value.currencies[0].code+"</td>";
+                            } else {
+                                html += "<td>No data!</td>";
+                            }
                         }
 
                         html += "<td>"+value.population+"</td>";
@@ -76,14 +80,26 @@
                         if (value.currencies.length > 1) {
                             var arr = [];
                             $.each(value.currencies, function (keyCurrencies, valueCurrencies) {
-                                if (valueCurrencies.code != "(none)" && valueCurrencies.code != null) {
-                                    arr[keyCurrencies] = valueCurrencies.code + " " + valueCurrencies.symbol;
+                                if (valueCurrencies.code != "(none)" && valueCurrencies.code != null && valueCurrencies.code != "") {
+                                    if (valueCurrencies.symbol != null) {
+                                        arr[keyCurrencies] = valueCurrencies.code + " " + valueCurrencies.symbol;
+                                    } else {
+                                        arr[keyCurrencies] = valueCurrencies.code;
+                                    }
                                 }
                             });
                             html += "<td>"+arr.join(", ")+"</td>";
                         } 
                         else {
-                            html += "<td>"+value.currencies[0].code + " " + value.currencies[0].symbol+"</td>";
+                            if (value.currencies[0].code != "(none)" && value.currencies[0].code != null && value.currencies[0].code != "") {
+                                if (value.currencies[0].symbol != null) {
+                                    html += "<td>"+value.currencies[0].code + " " + value.currencies[0].symbol+"</td>";
+                                } else {
+                                    html += "<td>"+value.currencies[0].code+"</td>";
+                                }
+                            } else {
+                                html += "<td>No data!</td>";
+                            }
                         }
                         html += "</tr>";
                     }
