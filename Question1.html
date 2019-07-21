@@ -1,60 +1,58 @@
 <!DOCTYPE html>
-<head> 
-    <title> Project2 Q1 Lucas&Maryna</title>
-    <script>
-        
-        function loadCountry() {
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-              myFunction(this);
-            }
-            //else alert("error: "+ this.status);
-          };
-          
-          xhttp.open("GET", "Country.xml", true);
-          xhttp.send();
-        }
-       
-        function myFunction(xml) {
-            xmlDoc = xml.responseXML;
-            //Display data   
-            var output = "<table border=1><tr><th>Country name</th>"
-                                  +"<th>Government</th>"
-                                  +"<th>Country Code</th>"
-                                  +"<th>Area</th></tr>";
-            xmlData=xmlDoc.getElementsByTagName('country');
-            for(i=0;i<xmlData.length;i++){
-                output+="<tr><td>"
-                        + xmlData[i].getElementsByTagName('name')[0].innerHTML
-                        +"</td>";
-                        
-                output+="<td>" 
-                      +xmlData[i].getElementsByTagName('government')[0].innerHTML
-                      +"</td>";
-                output+="<td>" 
-                      +xmlData[i].attributes[0].value
-                      +"</td>";   
-                output+="<td>" 
-                      +xmlData[i].attributes['area'].value
-                      +"</td></tr>"; 
-
-            }
-            output+='</table>'; 
-            document.getElementById('data').innerHTML = output;
-        }
-        </script>
- </head>      
-
-<body onload=loadCountry()>
-    <p> Name: Luan Nguyen<br>
-            Student ID: N01308316<br>
-            
-            Name: Maryna Khatnyuk<br>
-            Student ID: N01355798
-            </p>
-    <h3>Q1</h3>
-    <span id='data'></span>
-
-</body>
+<html lang="en">
+	<head>
+		<title> Project2 - Question 1</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script>
+			function loadCountry() {
+			  var xhttp = new XMLHttpRequest();
+			  xhttp.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      myFunction(this);
+			    }
+			    //else alert("error: "+ this.status);
+			  };
+			  xhttp.open("GET", "Country.xml", true);
+			  xhttp.send();
+			}
+			
+			function myFunction(xml) {
+			    xmlDoc = xml.responseXML;
+			    //Display data   
+			    var output = "<table class='table table-striped table-dark'><tr><th>Country name</th>"
+			                          +"<th>Government</th>"
+			                          +"<th>Country Code</th>"
+			                          +"<th>Area</th></tr>";
+			    xmlData=xmlDoc.getElementsByTagName('country');
+			    for(i=0;i<xmlData.length;i++){
+			        output+="<tr><td>"
+			                + xmlData[i].getElementsByTagName('name')[0].innerHTML
+			                +"</td>";
+			                
+			        output+="<td>" 
+			              +xmlData[i].getElementsByTagName('government')[0].innerHTML
+			              +"</td>";
+			        output+="<td>" 
+			              +xmlData[i].attributes[0].value
+			              +"</td>";   
+			        output+="<td>" 
+			              +xmlData[i].attributes['area'].value
+			              +"</td></tr>"; 
+			
+			    }
+			    output+='</table>'; 
+			    document.getElementById('data').innerHTML = output;
+			}
+		</script>
+	</head>
+	<body onload="loadCountry();">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1>List of country information</h1>
+					<div id='data'></div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
